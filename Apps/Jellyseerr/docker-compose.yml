@@ -1,0 +1,115 @@
+name: Jellyseerr
+services:
+  Jellyseerr:
+    image: fallenbagel/jellyseerr:1.7.0
+    restart: unless-stopped
+    environment:
+      PUID: $PUID
+      PGID: $PGID
+      TZ: $TZ
+    x-casaos:
+      envs:
+        - container: PUID
+          description:
+            en_us: for UserID
+        - container: PGID
+          description:
+            en_us: for GroupID
+        - container: TZ
+          description:
+            en_us: Specify a timezone to use, see this list.
+            zh_cn: "指定要使用的时区，请参阅此列表。"
+            ar_sa: "حدد المنطقة الزمنية التي ترغب في استخدامها، انظر هذه القائمة."
+            de_de: "Geben Sie eine Zeitzone an, die verwendet werden soll. Siehe diese Liste."
+            es_es: "Especifica una zona horaria para utilizar, consulta esta lista."
+            fr_fr: "Spécifiez un fuseau horaire à utiliser, consultez cette liste."
+            hu_hu: "Adja meg a használni kívánt időzónát, tekintse meg ezt a listát."
+            it_it: "Specifica un fuso orario da utilizzare, consulta questa lista."
+            ru_ru: "Укажите часовой пояс для использования, смотрите этот список."
+            pl_pl: "Określ strefę czasową do użycia, zobacz tę listę."
+            pt_br: "Especifique um fuso horário a ser usado, consulte esta lista."
+            sv_se: "Ange en tidszon att använda, se denna lista."
+            uk_ua: "Вкажіть часовий пояс, який буде використовуватися, подивіться цей список."
+      volumes:
+        - container: /config
+          description:
+            en_us: Contains all relevant configuration files.
+            zh_cn: 包含所有相关配置文件。
+            ar_sa: يحتوي على جميع ملفات التكوين ذات الصلة.
+            de_de: Enthält alle relevanten Konfigurationsdateien.
+            es_es: Contiene todos los archivos de configuración relevantes.
+            fr_fr: Contient tous les fichiers de configuration pertinents.
+            hu_hu: Tartalmazza az összes releváns konfigurációs fájlt.
+            it_it: Contiene tutti i file di configurazione rilevanti.
+            ru_ru: Содержит все соответствующие файлы конфигурации.
+            pl_pl: Zawiera wszystkie istotne pliki konfiguracyjne.
+            pt_br: Contém todos os arquivos de configuração relevantes.
+            sv_se: Innehåller alla relevanta konfigurationsfiler.
+            uk_ua: Містить всі відповідні файлів конфігурації.
+      ports:
+        - container: '5055'
+          description:
+            en_us: Port for Jellyseerr's web interface.
+            zh_cn: Jellyseerr 网络界面的端口。
+            ar_sa: منفذ واجهة Jellyseerr الويب.
+            de_de: Port für die Web-Oberfläche von Jellyseerr.
+            es_es: Puerto para la interfaz web de Jellyseerr.
+            fr_fr: Port pour l'interface web d'Jellyseerr.
+            hu_hu: Port az Jellyseerr webes felületéhez.
+            it_it: Porta per l'interfaccia web di Jellyseerr.
+            ru_ru: Порт для веб-интерфейса Jellyseerr.
+            pl_pl: Port dla interfejsu webowego Jellyseerr.
+            pt_br: Porta para a interface web do Jellyseerr.
+            sv_se: Port för Jellyseerrs webbgränssnitt.
+            uk_ua: Порт для веб-інтерфейсу Jellyseerr.
+    ports:
+      - target: 5055
+        published: 5055
+        protocol: tcp
+    volumes:
+      - type: bind
+        source: /DATA/AppData/Jellyseerr/config
+        target: /config
+    container_name: Jellyseerr
+x-casaos:
+  architectures:
+    - amd64
+    - arm
+    - arm64
+  main: Jellyseerr
+  description:
+    en_us: Jellyseerr is a free and open source software application for managing requests for your media library. It integrates with your existing services, such as Sonarr, Radarr, and Jellyfin/Plex!
+    zh_cn: Jellyseerr 是一个免费开源的软件应用程序，用于管理媒体库的请求。它与您现有的服务集成，如 Sonarr、Radarr 和 Jellyfin/Plex！
+    ar_sa: Jellyseerr هو تطبيق برمجي مجاني ومفتوح المصدر لإدارة الطلبات لمكتبة الوسائط الخاصة بك. يدمج مع خدماتك الحالية ، مثل Sonarr و Radarr و Jellyfin/Plex!
+    de_de: Jellyseerr ist eine kostenlose und Open-Source-Softwareanwendung zur Verwaltung von Anfragen für Ihre Medienbibliothek. Es integriert sich in Ihre vorhandenen Dienste wie Sonarr, Radarr und Jellyfin/Plex!
+    es_es: Jellyseerr es una aplicación de software gratuita y de código abierto para gestionar solicitudes para tu biblioteca de medios. ¡Se integra con tus servicios existentes, como Sonarr, Radarr y Jellyfin/Plex!
+    fr_fr: Jellyseerr est une application logicielle gratuite et open source pour la gestion des demandes de votre bibliothèque multimédia. Il s'intègre à vos services existants, tels que Sonarr, Radarr et Jellyfin/Plex !
+    hu_hu: Az Jellyseerr egy ingyenes és nyílt forráskódú szoftveralkalmazás a média könyvtáradban található kérések kezelésére. Integrálódik a meglévő szolgáltatásaiddal, mint például a Sonarr, Radarr és Jellyfin/Plex!
+    it_it: Jellyseerr è un'applicazione software gratuita e open source per la gestione delle richieste della tua libreria multimediale. Si integra con i tuoi servizi esistenti, come Sonarr, Radarr e Jellyfin/Plex!
+    ru_ru: Jellyseerr - это бесплатное и открытое программное приложение для управления запросами в вашей медиатеке. Оно интегрируется с вашими существующими сервисами, такими как Sonarr, Radarr и Jellyfin/Plex!
+    pl_pl: Jellyseerr to darmowy i otwarty program do zarządzania żądaniami w Twojej bibliotece multimedialnej. Współpracuje z istniejącymi usługami, takimi jak Sonarr, Radarr i Jellyfin/Plex!
+    pt_br: O Jellyseerr é um aplicativo de software gratuito e de código aberto para gerenciar solicitações em sua biblioteca de mídia. Ele se integra aos seus serviços existentes, como Sonarr, Radarr e Jellyfin/Plex!
+    sv_se: Jellyseerr är en gratis och öppen källkodsprogramvara för att hantera förfrågningar för din mediebibliotek. Den integrerar med dina befintliga tjänster, som Sonarr, Radarr och Jellyfin/Plex!
+    uk_ua: Jellyseerr - це безкоштовне та відкрите програмне забезпечення для керування запитами до вашої медіатеки. Воно інтегрується з існуючими сервісами, такими як Sonarr, Radarr і Jellyfin/Plex!
+  tagline:
+    en_us: Jellyseerr is a request management and media discovery tool built to work with your existing Jellyfin/Plex ecosystem.
+    zh_cn: Jellyseerr 是一个请求管理和媒体发现工具，专为与您现有的 Jellyfin/Plex 生态系统配合使用而构建。
+    ar_sa: Jellyseerr هو أداة إدارة الطلبات واكتشاف الوسائط المبنية للعمل مع نظام Jellyfin/Plex الحالي الخاص بك.
+    de_de: Jellyseerr ist ein Anforderungsverwaltungs- und Medienentdeckungstool, das mit Ihrem bestehenden Jellyfin/Plex-Ökosystem funktioniert.
+    es_es: Jellyseerr es una herramienta de gestión de solicitudes y descubrimiento de medios construida para funcionar con su ecosistema Jellyfin/Plex existente.
+    fr_fr: Jellyseerr est un outil de gestion des demandes et de découverte de médias conçu pour fonctionner avec votre écosystème Jellyfin/Plex existant.
+    hu_hu: Az Jellyseerr egy kérelemkezelő és médiakereső eszköz, amelyet a meglévő Jellyfin/Plex ökoszisztémáddal együtt lehet használni.
+    it_it: Jellyseerr è uno strumento di gestione delle richieste e scoperta dei media creato per funzionare con il tuo ecosistema Jellyfin/Plex esistente.
+    ru_ru: Jellyseerr - это инструмент управления запросами и обнаружения медиа, разработанный для работы с вашей существующей экосистемой Jellyfin/Plex.
+    pl_pl: Jellyseerr to narzędzie do zarządzania żądaniami i odkrywania multimediów, zaprojektowane do pracy w Twoim istniejącym ekosystemie Jellyfin/Plex.
+    pt_br: O Jellyseerr é uma ferramenta de gerenciamento de solicitações e descoberta de mídia construída para funcionar com seu ecossistema Jellyfin/Plex existente.
+    sv_se: Jellyseerr är ett verktyg för hantering av begäranden och upptäckt av medier som är utformat för att fungera med ditt befintliga Jellyfin/Plex-ekosystem.
+    uk_ua: Jellyseerr - це інструмент керування запитами та виявлення медіа, створений для роботи з вашою існуючою екосистемою Jellyfin/Plex.
+  developer: Fallenbagel
+  author: ilovethensa
+  icon: https://cdn.jsdelivr.net/gh/ilovethensa/CasaOS-addon-AppStore@master/Apps/Jellyseerr/icon.png
+  thumbnail: https://cdn.jsdelivr.net/gh/ilovethensa/CasaOS-addon-AppStore@master/Apps/Jellyseerr/icon.png
+  title:
+    en_us: Jellyseerr
+  category: Media
+  port_map: '5055'
